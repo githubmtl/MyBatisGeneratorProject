@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<properties resource="generatorConfig.properties"/>	
+	<!-- eclipse插件模式需要指定数据库驱动 -->
+	<!--<classPathEntry location="C:\Users\Administrator\Desktop\derbyclient-10.11.1.1.jar" />-->
+	<!-- targetRuntime如果为MyBatis3则生成Example相关方法，如果为MyBatis3Simple则不生成，defaultModelType为flat表示一个表生成一个类 -->
+	<context id="idvalue0" targetRuntime="MyBatis3"
+		defaultModelType="flat">
+		<!-- 设置JAVA文件编码格式 -->
+		<property name="javaFileEncoding" value="UTF-8"/>
+		<!-- 注释生成配置 -->
+		<commentGenerator>
+			<!-- 是否将数据库备注写成生成备注 -->
+			<property name="addRemarkComments" value="true" />
+		</commentGenerator>
+		<!-- 数据库连接信息 -->
+		<connectionFactory>
+			<property name="driverClass" value="${mbg.dbDriver}" />
+			<property name="connectionURL" value="${mbg.dbURL}" />
+			<property name="userId" value="${mbg.dbUser}" />
+			<property name="password" value="${mbg.dbPassword}" />
+		</connectionFactory>
+		<!-- 配置生成的JAVA类放在哪个工程，哪个包下面 -->
+		<javaModelGenerator targetPackage="com.mtl.entity"
+			targetProject="./src/main/java" />
+		<!-- 配置Mapper.xml放在哪个工程，哪个包下面 -->
+		<sqlMapGenerator targetPackage="com.mtl.mapper"
+			targetProject="./src/main/java" />
+		<!-- 配置生成的Mapper.java接口放在哪个工程，哪个包下面。type类型有3中 1.ANNOTATEDMAPPER:基于注解2.MIXEDMAPPER:注解和xml混合3.XMLMAPPER：基于XML -->
+		<javaClientGenerator targetPackage="com.mtl.mapper"
+			type="XMLMAPPER" targetProject="./src/main/java">
+			<!--是否允许建立子包（对应MySql的scheme） -->
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		<!-- 需要反向生成的表 -->
+		<table tableName="mtl_user" domainObjectName="User">
+			<!-- 配置插入数据后，返回主键值 -->
+			<generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+			<!--<generatedKey column="id" sqlStatement="VALUES IDENTITY_VAL_LOCAL()" identity="true" type="post"/>-->
+		</table>
+	</context>
+</generatorConfiguration>
